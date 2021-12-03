@@ -327,6 +327,9 @@ open class ButtonBarPagerTabStripViewController: PagerTabStripViewController, Pa
         cell.backgroundColor = settings.style.buttonBarItemBackgroundColor ?? cell.backgroundColor
         switch settings.style.selectedBarVerticalAlignment {
         case .full: cell.layer.cornerRadius = collectionView.frame.height / 2
+            if indexPath.row == currentIndex {
+                cell.backgroundColor = .clear
+            }
         default: cell.layer.cornerRadius = 0
         }
         if let image = indicatorInfo.image {
