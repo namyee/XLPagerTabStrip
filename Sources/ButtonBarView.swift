@@ -41,6 +41,7 @@ public enum SelectedBarVerticalAlignment {
     case top
     case middle
     case bottom
+    case full
 }
 
 open class ButtonBarView: UICollectionView {
@@ -170,7 +171,9 @@ open class ButtonBarView: UICollectionView {
 
     private func updateSelectedBarYPosition() {
         var selectedBarFrame = selectedBar.frame
-
+        selectedBar.layer.cornerRadius = 0
+        selectedBarFrame.size.height = selectedBarHeight
+        
         switch selectedBarVerticalAlignment {
         case .top:
             selectedBarFrame.origin.y = 0
@@ -178,9 +181,12 @@ open class ButtonBarView: UICollectionView {
             selectedBarFrame.origin.y = (frame.size.height - selectedBarHeight) / 2
         case .bottom:
             selectedBarFrame.origin.y = frame.size.height - selectedBarHeight
+        case .full:
+            selectedBarFrame.origin.y = 0
+            selectedBarFrame.size.height = self.frame.height
+            selectedBar.layer.cornerRadius = self.frame.height / 2
         }
 
-        selectedBarFrame.size.height = selectedBarHeight
         selectedBar.frame = selectedBarFrame
     }
 
